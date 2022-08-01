@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.19.3)
+
+project(main_exe)
+
+add_executable(${PROJECT_NAME} main.cpp)
+add_subdirectory(add_lib)
+add_subdirectory(ext/glfw)
+
+target_include_directories(${PROJECT_NAME} PUBLIC add_lib ext/glfw/include)
+
+#"adder" must be the same name in the library CMakeFiles.txt inside library directory
+target_link_directories(${PROJECT_NAME} 
+    PUBLIC add_lib 
+    PUBLIC ext/glfw/src)
+
+target_link_libraries(${PROJECT_NAME} adder glfw)
